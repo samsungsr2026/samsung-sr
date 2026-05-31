@@ -163,17 +163,17 @@ select.fi option{background:#fff;color:#111}
 .warn-box{background:var(--red-bg);border:1px solid rgba(244,63,94,.3);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--red);margin-bottom:14px}
 .info-box{background:var(--blue-bg);border:1px solid rgba(26,107,255,.3);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--blue);margin-bottom:14px}
 
-/* ── 위치검색 탭 스타일 ── */
+/* 위치검색 탭 스타일 */
 .loc-search-wrap{position:relative;margin-bottom:16px}
-.loc-search-input{width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:13px 44px 13px 44px;color:var(--text);font-size:16px;outline:none;transition:border-color .2s;-webkit-appearance:none;font-family:inherit}
+.loc-search-input{width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:13px 44px;color:var(--text);font-size:16px;outline:none;transition:border-color .2s;font-family:inherit}
 .loc-search-input:focus{border-color:var(--blue)}
 .loc-search-input::placeholder{color:var(--text3)}
-.loc-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;cursor:pointer;transition:all .15s;animation:fadeIn .2s ease both}
-.loc-card:hover{border-color:var(--blue);transform:translateY(-1px)}
+.loc-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;cursor:pointer;transition:all .15s}
+.loc-card:hover{border-color:var(--blue)}
 .loc-card-top{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(26,107,255,.12),rgba(0,212,255,.06));border-bottom:1px solid rgba(0,212,255,.1);padding:12px 14px}
 .loc-icon{width:32px;height:32px;background:rgba(26,107,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.loc-text{font-size:18px;font-weight:800;color:#00d4ff;letter-spacing:.04em}
-.loc-empty-text{font-size:14px;color:var(--text3);font-style:italic}
+.loc-text{font-size:18px;font-weight:800;color:var(--blue);letter-spacing:.04em}
+.loc-empty-text{font-size:14px;color:var(--text3)}
 .loc-mold{font-size:11px;color:var(--text3);margin-top:2px}
 .loc-card-body{padding:12px 14px}
 .loc-chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 8px;font-size:11px;margin-right:5px;margin-bottom:4px}
@@ -183,15 +183,13 @@ select.fi option{background:#fff;color:#111}
 .loc-name{font-size:14px;font-weight:600;color:var(--text);margin-top:6px}
 .loc-empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
 .loc-empty-state .icon{font-size:48px;margin-bottom:12px}
-.loc-result-meta{font-size:12px;color:var(--text3);margin-bottom:10px;padding:0 2px}
-/* 위치 모달 */
-.loc-mo{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:480px;max-width:92vw;padding:24px;max-height:85vh;overflow-y:auto}
-.loc-big{background:linear-gradient(135deg,rgba(26,107,255,.15),rgba(0,212,255,.08));border:1px solid rgba(0,212,255,.2);border-radius:12px;padding:18px;text-align:center;margin-bottom:16px}
+.loc-result-meta{font-size:12px;color:var(--text3);margin-bottom:10px}
+.loc-big{background:var(--blue-bg);border:1px solid rgba(26,107,255,.3);border-radius:12px;padding:18px;text-align:center;margin-bottom:16px}
 .loc-big-label{font-size:11px;color:var(--text3);margin-bottom:6px}
-.loc-big-val{font-size:28px;font-weight:800;color:#00d4ff;letter-spacing:.06em}
-.loc-big-empty{font-size:16px;color:var(--text3);font-style:italic}
+.loc-big-val{font-size:28px;font-weight:800;color:var(--blue);letter-spacing:.06em}
+.loc-big-empty{font-size:16px;color:var(--text3)}
 .loc-mo-rows{display:grid;gap:8px;margin-bottom:14px}
-.loc-mo-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg3);border-radius:8px;font-size:13px}
+.loc-mo-row{display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg3);border-radius:8px;font-size:13px}
 .loc-mo-row .k{color:var(--text3);font-weight:600}
 .loc-mo-row .v{color:var(--text);font-weight:700}
 .loc-mo-row .v.blue{color:var(--blue)}
@@ -199,7 +197,6 @@ select.fi option{background:#fff;color:#111}
 .loc-edit-input:focus{border-color:var(--blue)}
 .loc-producer-chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;margin:3px;transition:all .15s}
 .loc-producer-chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
-
 </style>
 <!-- SheetJS: xlsx/xls 파일 읽기용 -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -208,9 +205,8 @@ select.fi option{background:#fff;color:#111}
 
 <!-- 상단바 -->
 <div class="topbar">
-  <!-- 왼쪽 상단 위치검색 버튼 -->
   <div style="position:absolute;left:0;top:0;bottom:0;width:220px;display:flex;align-items:center;justify-content:center;padding:0 12px;z-index:10">
-    <button onclick="go('loc')" style="width:100%;height:44px;background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(26,107,255,.15));border:1.5px solid rgba(0,212,255,.4);border-radius:10px;color:#00d4ff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;font-family:inherit" onmouseover="this.style.background='linear-gradient(135deg,rgba(0,212,255,.25),rgba(26,107,255,.25))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(0,212,255,.15),rgba(26,107,255,.15))'">
+    <button onclick="go('loc')" style="width:100%;height:44px;background:linear-gradient(135deg,rgba(26,107,255,.15),rgba(0,212,255,.1));border:1.5px solid rgba(26,107,255,.4);border-radius:10px;color:var(--blue);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       📍 위치 검색
     </button>
@@ -239,8 +235,6 @@ select.fi option{background:#fff;color:#111}
   <div class="topbar-right">
     <div class="topbar-right-row">
       <div id="top-status" style="display:flex;gap:8px"></div>
-      <span id="jb-sync" style="font-size:11px;color:#888;white-space:nowrap">🔄 연결 중...</span>
-      <button onclick="jbPull()" style="background:rgba(26,107,255,.1);border:1px solid rgba(26,107,255,.3);color:#1a6bff;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap">🔄 새로고침</button>
       <div id="top-auth" style="display:flex;align-items:center;gap:8px"></div>
     </div>
     <div class="topbar-time" id="tt"></div>
@@ -293,7 +287,7 @@ select.fi option{background:#fff;color:#111}
       제품 태그 출력
     </button>
     <button class="nav-item" onclick="go('loc')" id="nb-loc">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       위치 검색
     </button>
     <button class="nav-item" onclick="go('set')" id="nb-set">
@@ -460,126 +454,7 @@ function requireEdit(){
   return false;
 }
 
-// ── GitHub Gist 실시간 공유 DB ──────────────────────────────────
-const GIST_TOKEN = localStorage.getItem('sr-gh-token') || '';
-const GIST_OWNER = 'samsungsr2026';
-let _gistId = localStorage.getItem('sr-gist-id') || '';
-let _gistShas = {};
-let _saving = false;
-
-function jbStat(msg, color) {
-  const el = document.getElementById('jb-sync');
-  if (el) { el.textContent = msg; el.style.color = color || '#888'; }
-}
-
-async function gistGet() {
-  if (!_gistId) return null;
-  try {
-    const r = await fetch('https://api.github.com/gists/' + _gistId, {
-      headers: { 'Authorization': 'token ' + GIST_TOKEN, 'Accept': 'application/vnd.github.v3+json' }
-    });
-    if (!r.ok) return null;
-    const d = await r.json();
-    const result = {};
-    ['inv.json','tx.json','orders.json'].forEach(f => {
-      if (d.files[f]) {
-        try { result[f.replace('.json','')] = JSON.parse(d.files[f].content); } catch(e) {}
-      }
-    });
-    return result;
-  } catch(e) { return null; }
-}
-
-async function gistUpdate(files) {
-  if (!_gistId) return false;
-  try {
-    const r = await fetch('https://api.github.com/gists/' + _gistId, {
-      method: 'PATCH',
-      headers: { 'Authorization': 'token ' + GIST_TOKEN, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ files })
-    });
-    return r.ok;
-  } catch(e) { return false; }
-}
-
-async function gistCreate() {
-  try {
-    const r = await fetch('https://api.github.com/gists', {
-      method: 'POST',
-      headers: { 'Authorization': 'token ' + GIST_TOKEN, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        description: 'SamsungSR Data',
-        public: false,
-        files: {
-          'inv.json': { content: JSON.stringify(inv) },
-          'tx.json': { content: JSON.stringify(txs) },
-          'orders.json': { content: JSON.stringify(orders) }
-        }
-      })
-    });
-    if (!r.ok) return null;
-    const d = await r.json();
-    return d.id;
-  } catch(e) { return null; }
-}
-
-async function sv() {
-  localStorage.setItem('sr-inv', JSON.stringify(inv));
-  localStorage.setItem('sr-tx', JSON.stringify(txs));
-  localStorage.setItem('sr-orders', JSON.stringify(orders));
-  if (_saving) return;
-  _saving = true;
-  jbStat('💾 저장 중...');
-  try {
-    if (!_gistId) {
-      jbStat('🔧 공유DB 생성 중...');
-      const id = await gistCreate();
-      if (id) {
-        _gistId = id;
-        localStorage.setItem('sr-gist-id', id);
-        jbStat('✅ 공유DB 생성완료!', '#0d9e72');
-        tst('✅ 공유DB 생성완료! ID: ' + id);
-      } else {
-        jbStat('⚠️ 저장실패 - 토큰확인필요', '#c07800');
-      }
-    } else {
-      const ok = await gistUpdate({
-        'inv.json': { content: JSON.stringify(inv) },
-        'tx.json': { content: JSON.stringify(txs) },
-        'orders.json': { content: JSON.stringify(orders) }
-      });
-      jbStat(ok ? '✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 저장됨' : '⚠️ 저장실패', ok ? '#0d9e72' : '#c07800');
-    }
-  } catch(e) { jbStat('⚠️ 저장오류', '#c07800'); }
-  _saving = false;
-}
-
-async function jbPull() {
-  if (_saving) return;
-  if (!_gistId) { 
-    // gistId 없으면 로컬 데이터로 화면 그리기
-    const inputTabs = ['io', 'plan', 'barcode'];
-    if (!inputTabs.includes(tab)) { render(); }
-    dots(); 
-    return; 
-  }
-  jbStat('🔄 동기화 중...');
-  try {
-    const data = await gistGet();
-    if (data) {
-      if (Array.isArray(data.inv)) { inv = data.inv; localStorage.setItem('sr-inv', JSON.stringify(inv)); }
-      if (Array.isArray(data.tx)) { txs = data.tx; localStorage.setItem('sr-tx', JSON.stringify(txs)); }
-      if (Array.isArray(data.orders)) { orders = data.orders; localStorage.setItem('sr-orders', JSON.stringify(orders)); }
-      // 입력 화면일 때는 render 호출 안 함 (입력 초기화 방지)
-      const inputTabs = ['io', 'plan', 'barcode'];
-      if (!inputTabs.includes(tab)) { render(); dots(); }
-      else { dots(); }
-      jbStat('✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 동기화', '#0d9e72');
-    } else {
-      jbStat('⚠️ 연결오류', '#c07800');
-    }
-  } catch(e) { jbStat('⚠️ 연결오류', '#c07800'); }
-}
+function sv(){localStorage.setItem('sr-inv',JSON.stringify(inv));localStorage.setItem('sr-tx',JSON.stringify(txs));localStorage.setItem('sr-orders',JSON.stringify(orders));}
 
 // 파일 업로드 처리 - 사진은 이미지만, 도면은 모든 파일 허용
 function handleImgUpload(itemId,kind,inputEl){
@@ -768,190 +643,6 @@ function dots(){
     }
   }
 }
-
-
-// ── 위치검색 탭 ──────────────────────────────────────────────
-// 위치관리 데이터 (재고관리 inv와 동기화)
-function getLocData(){
-  return inv.map(i=>({
-    id:i.id,
-    name:i.name,
-    classNo:i.classNo||'',
-    location:i.location||'',
-    producer:i.producer||'',
-    material:i.material||'',
-    note:i.note||''
-  }));
-}
-
-let locEditMode=false;
-let locTimer=null;
-
-function rLoc(){
-  const editBtn = locEditMode
-    ? '<button onclick="locEditMode=false;render()" style="background:var(--amber);border:1px solid var(--amber);color:#0f1117;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">✏️ 편집중</button>'
-    : '<button onclick="locEditMode=true;render()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">🔒 편집</button>';
-  return '<div class="page-title">위치 검색</div>'
-    + '<div class="page-sub">금형번호 또는 부품번호로 위치를 검색하세요</div>'
-    + '<div style="display:flex;gap:10px;margin-bottom:14px;align-items:center">'
-    + '<div class="loc-search-wrap" style="flex:1;margin-bottom:0">'
-    + '<svg style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>'
-    + '<input type="text" class="loc-search-input" id="loc-search" placeholder="금형번호 또는 부품번호 입력..." oninput="locSearch(this.value)" autocomplete="off">'
-    + '<button id="loc-clear" onclick="document.getElementById(&quot;loc-search&quot;).value=&quot;&quot;;locSearch(&quot;&quot;);this.style.display=&quot;none&quot;" style="display:none;position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;padding:4px">✕</button>'
-    + '</div>'
-    + editBtn
-    + '</div>'
-    + '<div id="loc-results">'
-    + '<div class="loc-empty-state"><div class="icon">📍</div><div>금형번호 또는 부품번호를 입력하세요</div></div>'
-    + '</div>';
-}
-
-function locSearch(val){
-  const clearBtn=document.getElementById('loc-clear');
-  if(clearBtn)clearBtn.style.display=val?'block':'none';
-  clearTimeout(locTimer);
-  locTimer=setTimeout(()=>locRenderResults(val.trim()),80);
-}
-
-function locRenderResults(q){
-  const box=document.getElementById('loc-results');
-  if(!box)return;
-  if(!q){
-    box.innerHTML='<div class="loc-empty-state"><div class="icon">📍</div><div>금형번호 또는 부품번호를 입력하세요</div></div>';
-    return;
-  }
-  const qu=q.toUpperCase();
-  const list=inv.filter(d=>
-    d.id.toUpperCase().includes(qu)||
-    d.name.toUpperCase().includes(qu)||
-    (d.classNo||'').includes(q)
-  ).sort((a,b)=>{
-    const aId=a.id.toUpperCase().includes(qu);
-    const bId=b.id.toUpperCase().includes(qu);
-    if(aId&&!bId)return -1;
-    if(!aId&&bId)return 1;
-    return 0;
-  });
-  if(!list.length){
-    box.innerHTML='<div class="loc-empty-state"><div class="icon">🔍</div><div>검색 결과 없음</div></div>';
-    return;
-  }
-  box.innerHTML=`<div class="loc-result-meta">검색 결과 <strong>${list.length}건</strong></div>`+
-    list.map((d,i)=>`
-    <div class="loc-card" onclick="locOpenModal('${d.id}')" style="animation-delay:${i*20}ms">
-      <div class="loc-card-top">
-        <div class="loc-icon">📍</div>
-        <div style="flex:1">
-          ${d.location?`<div class="loc-text">${d.location}</div>`:`<div class="loc-empty-text">위치 미등록</div>`}
-          <div class="loc-mold">${d.id}${d.producer?' · '+d.producer:''}</div>
-        </div>
-      </div>
-      <div class="loc-card-body">
-        <div>
-          <span class="loc-chip blue"><span class="lbl">금형</span><span class="val">${d.id}</span></span>
-          <span class="loc-chip"><span class="lbl">부품번호</span><span class="val">${d.classNo||'-'}</span></span>
-          ${d.material?`<span class="loc-chip"><span class="lbl">재질</span><span class="val">${d.material}</span></span>`:''}
-        </div>
-        <div class="loc-name">${d.name}</div>
-      </div>
-    </div>`).join('');
-}
-
-function locOpenModal(id){
-  var d=inv.find(function(i){return i.id===id;});
-  if(!d)return;
-  var html='';
-  
-  // 위치 표시
-  html+='<div class="loc-big"';
-  if(locEditMode)html+=' style="cursor:pointer" onclick="locToggleEditSec()"';
-  html+='><div class="loc-big-label">📍 제품 위치';
-  if(locEditMode)html+=' <span style="font-size:10px;opacity:.5">(탭하여 수정)</span>';
-  html+='</div>';
-  if(d.location)html+='<div class="loc-big-val">'+d.location+'</div>';
-  else html+='<div class="loc-big-empty">위치 미등록</div>';
-  html+='</div>';
-  
-  // 위치 편집 섹션
-  if(locEditMode){
-    html+='<div id="loc-edit-sec" style="display:none;margin-bottom:14px">';
-    html+='<input class="loc-edit-input" id="loc-edit-input" type="text" value="'+(d.location||'')+'" placeholder="위치 입력 (예: D2.2.1)">';
-    html+='<div style="display:flex;gap:8px">';
-    html+='<button class="btn bbg" style="flex:1;justify-content:center" onclick="locSaveLocation(this.dataset.id)" data-id="'+d.id+'">✓ 위치 저장</button>';
-    html+='<button class="btn" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border)" onclick="locToggleEditSec()">취소</button>';
-    html+='</div></div>';
-  }
-  
-  // 기본 정보
-  html+='<div class="loc-mo-rows">';
-  html+='<div class="loc-mo-row"><span class="k">금형번호</span><span class="v blue">'+d.id+'</span></div>';
-  html+='<div class="loc-mo-row"><span class="k">부품번호</span><span class="v">'+(d.classNo||'-')+'</span></div>';
-  html+='<div class="loc-mo-row"><span class="k">재질</span><span class="v">'+(d.material||'-')+'</span></div>';
-  html+='<div class="loc-mo-row"><span class="k">품명</span><span class="v">'+d.name+'</span></div>';
-  html+='</div>';
-  
-  // 생산자
-  if(locEditMode){
-    html+='<div style="margin-bottom:14px">';
-    html+='<div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px">🏭 생산자</div>';
-    html+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">';
-    WK.forEach(function(p){
-      html+='<div class="loc-producer-chip'+(d.producer===p?' active':'')+'" onclick="locSelectProducer(this,this.textContent)">'+p+'</div>';
-    });
-    html+='</div>';
-    html+='<input class="loc-edit-input" id="loc-prod-input" type="text" value="'+(d.producer||'')+'" placeholder="생산자 직접 입력">';
-    html+='<button class="btn bbl btn-full" onclick="locSaveProducer(this.dataset.id)" data-id="'+d.id+'">✓ 생산자 저장</button>';
-    html+='</div>';
-  } else {
-    html+='<div class="loc-mo-rows"><div class="loc-mo-row"><span class="k">생산자</span><span class="v">'+(d.producer||'-')+'</span></div></div>';
-  }
-  
-  document.getElementById('mo-title').textContent='📍 '+d.name;
-  document.getElementById('mb').innerHTML=html;
-  document.getElementById('ov').classList.add('on');
-}
-
-function locToggleEditSec(){
-  var s=document.getElementById('loc-edit-sec');
-  if(s)s.style.display=s.style.display==='none'?'block':'none';
-}
-
-function locSelectProducer(el,name){
-  document.querySelectorAll('.loc-producer-chip').forEach(function(c){c.classList.remove('active');});
-  el.classList.add('active');
-  var inp = document.getElementById('loc-prod-input');
-  if(inp) inp.value = name || el.textContent;
-}
-
-function locSaveLocation(btn){
-  var id = btn && btn.dataset ? btn.dataset.id : btn;
-  var el = document.getElementById('loc-edit-input');
-  var newLoc = el ? el.value.trim() : '';
-  if(!newLoc){tst('위치를 입력해주세요');return;}
-  var idx=inv.findIndex(function(i){return i.id===id;});
-  if(idx<0)return;
-  inv[idx].location=newLoc;
-  sv();
-  cmo();
-  tst('📍 위치 저장: '+newLoc);
-  var sq = document.getElementById('loc-search');
-  locRenderResults(sq?sq.value:'');
-}
-
-function locSaveProducer(btn){
-  var id = btn && btn.dataset ? btn.dataset.id : btn;
-  var el = document.getElementById('loc-prod-input');
-  var prod = el ? el.value.trim() : '';
-  var idx=inv.findIndex(function(i){return i.id===id;});
-  if(idx<0)return;
-  inv[idx].producer=prod;
-  sv();
-  cmo();
-  tst('🏭 생산자 저장: '+(prod||'삭제됨'));
-  var sq = document.getElementById('loc-search');
-  locRenderResults(sq?sq.value:'');
-}
-
 
 function go(t){
   tab=t;
@@ -4242,57 +3933,154 @@ function changeMyPw(){
   if(acc){acc.pw=np;saveAccounts();tst('✓ 비밀번호가 변경되었습니다');}
 }
 
-tick();setInterval(tick,30000);
-window.addEventListener('load', () => {
-  const token = localStorage.getItem('sr-gh-token') || '';
-  const gistId = localStorage.getItem('sr-gist-id') || '';
-  if (!token) {
-    setTimeout(showTokenSetup, 500);
-  } else {
-    // setTimeout(jbPull, 800); // 자동 동기화 비활성화
-  }
-});
 
-function showTokenSetup() {
-  document.getElementById('mo-title').textContent = '☁️ 공유 설정';
-  document.getElementById('mb').innerHTML = `
-    <div style="margin-bottom:16px;padding:12px 16px;background:var(--blue-bg);border:1px solid rgba(26,107,255,.3);border-radius:8px;font-size:13px;color:var(--blue)">
-      어느 컴퓨터에서나 같은 데이터를 쓰려면 GitHub 토큰이 필요해요.<br>
-      <strong>한 번만 입력하면 이 컴퓨터에 저장됩니다.</strong>
-    </div>
-    <div class="fg">
-      <label class="fl">GitHub Personal Access Token</label>
-      <input type="text" class="fi" id="token-input" placeholder="ghp_..." style="font-family:monospace;font-size:13px">
-      <div style="font-size:11px;color:var(--text3);margin-top:4px">토큰: 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</div>
-    </div>
-    <div class="fg">
-      <label class="fl">Gist ID (다른 컴퓨터에서 입력)</label>
-      <input type="text" class="fi" id="gist-input" placeholder="처음이면 비워두세요 - 자동 생성됩니다" style="font-family:monospace;font-size:13px">
-    </div>
-    <button class="btn bbl btn-full" onclick="saveTokenSetup()">✓ 저장하고 연결</button>
-  `;
-  setTimeout(() => {
-    const el = document.getElementById('token-input');
-    if (el) el.value = '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';
-  }, 100);
+// ── 위치검색 탭 ──────────────────────────────────────────────
+let locEditMode = false;
+let locTimer = null;
+
+function rLoc() {
+  var editBtnHtml = locEditMode
+    ? '<button onclick="locEditMode=false;render()" style="background:var(--amber);border:1px solid var(--amber);color:#0f1117;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">✏️ 편집중</button>'
+    : '<button onclick="locEditMode=true;render()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">🔒 편집</button>';
+  return '<div class="page-title">위치 검색</div>'
+    + '<div class="page-sub">금형번호 또는 부품번호로 위치를 검색하세요</div>'
+    + '<div style="display:flex;gap:10px;margin-bottom:14px;align-items:center">'
+    + '<div class="loc-search-wrap" style="flex:1;margin-bottom:0">'
+    + '<svg style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>'
+    + '<input type="text" class="loc-search-input" id="loc-search" placeholder="금형번호 또는 부품번호 입력..." oninput="locSearch(this.value)" autocomplete="off" style="padding-left:44px">'
+    + '</div>'
+    + editBtnHtml
+    + '</div>'
+    + '<div id="loc-results">'
+    + '<div class="loc-empty-state"><div class="icon">📍</div><div>금형번호 또는 부품번호를 입력하세요</div></div>'
+    + '</div>';
+}
+
+function locSearch(val) {
+  clearTimeout(locTimer);
+  locTimer = setTimeout(function() { locRenderResults(val.trim()); }, 80);
+}
+
+function locRenderResults(q) {
+  var box = document.getElementById('loc-results');
+  if (!box) return;
+  if (!q) {
+    box.innerHTML = '<div class="loc-empty-state"><div class="icon">📍</div><div>금형번호 또는 부품번호를 입력하세요</div></div>';
+    return;
+  }
+  var qu = q.toUpperCase();
+  var list = inv.filter(function(d) {
+    return d.id.toUpperCase().includes(qu) || d.name.toUpperCase().includes(qu) || (d.classNo || '').includes(q);
+  }).sort(function(a, b) {
+    var aId = a.id.toUpperCase().includes(qu);
+    var bId = b.id.toUpperCase().includes(qu);
+    if (aId && !bId) return -1;
+    if (!aId && bId) return 1;
+    return 0;
+  });
+  if (!list.length) {
+    box.innerHTML = '<div class="loc-empty-state"><div class="icon">🔍</div><div>검색 결과 없음</div></div>';
+    return;
+  }
+  box.innerHTML = '<div class="loc-result-meta">검색 결과 <strong>' + list.length + '건</strong></div>'
+    + list.map(function(d, i) {
+      return '<div class="loc-card" onclick="locOpenModal(\"' + d.id + '\")" style="animation-delay:' + (i * 20) + 'ms">'
+        + '<div class="loc-card-top">'
+        + '<div class="loc-icon">📍</div>'
+        + '<div style="flex:1">'
+        + (d.location ? '<div class="loc-text">' + d.location + '</div>' : '<div class="loc-empty-text">위치 미등록</div>')
+        + '<div class="loc-mold">' + d.id + (d.producer ? ' · ' + d.producer : '') + '</div>'
+        + '</div></div>'
+        + '<div class="loc-card-body">'
+        + '<div>'
+        + '<span class="loc-chip blue"><span class="lbl">금형</span><span class="val">' + d.id + '</span></span>'
+        + '<span class="loc-chip"><span class="lbl">부품번호</span><span class="val">' + (d.classNo || '-') + '</span></span>'
+        + (d.material ? '<span class="loc-chip"><span class="lbl">재질</span><span class="val">' + d.material + '</span></span>' : '')
+        + '</div>'
+        + '<div class="loc-name">' + d.name + '</div>'
+        + '</div></div>';
+    }).join('');
+}
+
+function locOpenModal(id) {
+  var d = inv.find(function(i) { return i.id === id; });
+  if (!d) return;
+  var html = '';
+  html += '<div class="loc-big"' + (locEditMode ? ' style="cursor:pointer" onclick="locToggleEditSec()"' : '') + '>';
+  html += '<div class="loc-big-label">📍 제품 위치' + (locEditMode ? ' <span style="font-size:10px;opacity:.5">(탭하여 수정)</span>' : '') + '</div>';
+  html += d.location ? '<div class="loc-big-val">' + d.location + '</div>' : '<div class="loc-big-empty">위치 미등록</div>';
+  html += '</div>';
+  if (locEditMode) {
+    html += '<div id="loc-edit-sec" style="display:none;margin-bottom:14px">';
+    html += '<input class="loc-edit-input" id="loc-edit-input" type="text" value="' + (d.location || '') + '" placeholder="위치 입력 (예: D2.2.1)">';
+    html += '<div style="display:flex;gap:8px">';
+    html += '<button class="btn bbg" style="flex:1;justify-content:center" onclick="locSaveLocation(&quot;' + d.id + '&quot;)">✓ 위치 저장</button>';
+    html += '<button class="btn" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border)" onclick="locToggleEditSec()">취소</button>';
+    html += '</div></div>';
+  }
+  html += '<div class="loc-mo-rows">';
+  html += '<div class="loc-mo-row"><span class="k">금형번호</span><span class="v blue">' + d.id + '</span></div>';
+  html += '<div class="loc-mo-row"><span class="k">부품번호</span><span class="v">' + (d.classNo || '-') + '</span></div>';
+  html += '<div class="loc-mo-row"><span class="k">재질</span><span class="v">' + (d.material || '-') + '</span></div>';
+  html += '<div class="loc-mo-row"><span class="k">품명</span><span class="v">' + d.name + '</span></div>';
+  html += '</div>';
+  if (locEditMode) {
+    html += '<div style="margin-bottom:14px">';
+    html += '<div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px">🏭 생산자</div>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">';
+    WK.forEach(function(p) {
+      html += '<div class="loc-producer-chip' + (d.producer === p ? ' active' : '') + '" onclick="locSelectProducer(this,&quot;' + p + '&quot;)">' + p + '</div>';
+    });
+    html += '</div>';
+    html += '<input class="loc-edit-input" id="loc-prod-input" type="text" value="' + (d.producer || '') + '" placeholder="생산자 직접 입력">';
+    html += '<button class="btn bbl btn-full" onclick="locSaveProducer(&quot;' + d.id + '&quot;)">✓ 생산자 저장</button>';
+    html += '</div>';
+  } else {
+    html += '<div class="loc-mo-rows"><div class="loc-mo-row"><span class="k">생산자</span><span class="v">' + (d.producer || '-') + '</span></div></div>';
+  }
+  document.getElementById('mo-title').textContent = '📍 ' + d.name;
+  document.getElementById('mb').innerHTML = html;
   document.getElementById('ov').classList.add('on');
 }
 
-function saveTokenSetup() {
-  const token = document.getElementById('token-input')?.value?.trim();
-  const gistId = document.getElementById('gist-input')?.value?.trim();
-  if (!token) { tst('토큰을 입력해주세요'); return; }
-  localStorage.setItem('sr-gh-token', token);
-  if (gistId) { 
-    localStorage.setItem('sr-gist-id', gistId);
-    _gistId = gistId;
-  }
-  cmo();
-  tst('✅ 설정 저장됨');
-  setTimeout(jbPull, 300);
+function locToggleEditSec() {
+  var s = document.getElementById('loc-edit-sec');
+  if (s) s.style.display = s.style.display === 'none' ? 'block' : 'none';
 }
-// 자동 동기화 비활성화 - 수동 새로고침 버튼으로만 동기화
-// setInterval(jbPull, 5000);
+
+function locSelectProducer(el, name) {
+  document.querySelectorAll('.loc-producer-chip').forEach(function(c) { c.classList.remove('active'); });
+  el.classList.add('active');
+  var input = document.getElementById('loc-prod-input');
+  if (input) input.value = name;
+}
+
+function locSaveLocation(id) {
+  var newLoc = document.getElementById('loc-edit-input') ? document.getElementById('loc-edit-input').value.trim() : '';
+  if (!newLoc) { tst('위치를 입력해주세요'); return; }
+  var idx = inv.findIndex(function(i) { return i.id === id; });
+  if (idx < 0) return;
+  inv[idx].location = newLoc;
+  sv();
+  cmo();
+  tst('📍 위치 저장: ' + newLoc);
+  var q = document.getElementById('loc-search');
+  if (q && q.value) locRenderResults(q.value.trim());
+}
+
+function locSaveProducer(id) {
+  var prod = document.getElementById('loc-prod-input') ? document.getElementById('loc-prod-input').value.trim() : '';
+  var idx = inv.findIndex(function(i) { return i.id === id; });
+  if (idx < 0) return;
+  inv[idx].producer = prod;
+  sv();
+  cmo();
+  tst('🏭 생산자 저장: ' + (prod || '삭제됨'));
+  var q = document.getElementById('loc-search');
+  if (q && q.value) locRenderResults(q.value.trim());
+}
+
+tick();setInterval(tick,30000);render();
 // 모든 input[type=number,text,date] 클릭 시 전체 선택
 document.addEventListener('click',function(e){
   if(e.target&&(e.target.tagName==='INPUT')&&
