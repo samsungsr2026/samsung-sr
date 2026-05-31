@@ -4249,7 +4249,7 @@ window.addEventListener('load', () => {
   if (!token) {
     setTimeout(showTokenSetup, 500);
   } else {
-    setTimeout(jbPull, 800);
+    // setTimeout(jbPull, 800); // 자동 동기화 비활성화
   }
 });
 
@@ -4291,7 +4291,8 @@ function saveTokenSetup() {
   tst('✅ 설정 저장됨');
   setTimeout(jbPull, 300);
 }
-setInterval(jbPull, 5000);
+// 자동 동기화 비활성화 - 수동 새로고침 버튼으로만 동기화
+// setInterval(jbPull, 5000);
 // 모든 input[type=number,text,date] 클릭 시 전체 선택
 document.addEventListener('click',function(e){
   if(e.target&&(e.target.tagName==='INPUT')&&
