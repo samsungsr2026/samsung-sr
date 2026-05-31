@@ -556,7 +556,13 @@ async function sv() {
 
 async function jbPull() {
   if (_saving) return;
-  if (!_gistId) { render(); dots(); return; }
+  if (!_gistId) { 
+    // gistId 없으면 로컬 데이터로 화면 그리기
+    const inputTabs = ['io', 'plan', 'barcode'];
+    if (!inputTabs.includes(tab)) { render(); }
+    dots(); 
+    return; 
+  }
   jbStat('🔄 동기화 중...');
   try {
     const data = await gistGet();
@@ -564,7 +570,10 @@ async function jbPull() {
       if (Array.isArray(data.inv)) { inv = data.inv; localStorage.setItem('sr-inv', JSON.stringify(inv)); }
       if (Array.isArray(data.tx)) { txs = data.tx; localStorage.setItem('sr-tx', JSON.stringify(txs)); }
       if (Array.isArray(data.orders)) { orders = data.orders; localStorage.setItem('sr-orders', JSON.stringify(orders)); }
-      render(); dots();
+      // 입력 화면일 때는 render 호출 안 함 (입력 초기화 방지)
+      const inputTabs = ['io', 'plan', 'barcode'];
+      if (!inputTabs.includes(tab)) { render(); dots(); }
+      else { dots(); }
       jbStat('✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 동기화', '#0d9e72');
     } else {
       jbStat('⚠️ 연결오류', '#c07800');
