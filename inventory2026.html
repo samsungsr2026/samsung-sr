@@ -461,7 +461,7 @@ function requireEdit(){
 }
 
 // ── GitHub Gist 실시간 공유 DB ──────────────────────────────────
-const GIST_TOKEN = localStorage.getItem('sr-gh-token') || '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';
+const GIST_TOKEN = localStorage.getItem('sr-gh-token') || '';
 const GIST_OWNER = 'samsungsr2026';
 let _gistId = localStorage.getItem('sr-gist-id') || '';
 let _gistShas = {};
@@ -4234,7 +4234,54 @@ function changeMyPw(){
 }
 
 tick();setInterval(tick,30000);
-window.addEventListener('load', () => setTimeout(jbPull, 800));
+window.addEventListener('load', () => {
+  const token = localStorage.getItem('sr-gh-token') || '';
+  const gistId = localStorage.getItem('sr-gist-id') || '';
+  if (!token) {
+    setTimeout(showTokenSetup, 500);
+  } else {
+    setTimeout(jbPull, 800);
+  }
+});
+
+function showTokenSetup() {
+  document.getElementById('mo-title').textContent = '☁️ 공유 설정';
+  document.getElementById('mb').innerHTML = `
+    <div style="margin-bottom:16px;padding:12px 16px;background:var(--blue-bg);border:1px solid rgba(26,107,255,.3);border-radius:8px;font-size:13px;color:var(--blue)">
+      어느 컴퓨터에서나 같은 데이터를 쓰려면 GitHub 토큰이 필요해요.<br>
+      <strong>한 번만 입력하면 이 컴퓨터에 저장됩니다.</strong>
+    </div>
+    <div class="fg">
+      <label class="fl">GitHub Personal Access Token</label>
+      <input type="text" class="fi" id="token-input" placeholder="ghp_..." style="font-family:monospace;font-size:13px">
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">토큰: 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</div>
+    </div>
+    <div class="fg">
+      <label class="fl">Gist ID (다른 컴퓨터에서 입력)</label>
+      <input type="text" class="fi" id="gist-input" placeholder="처음이면 비워두세요 - 자동 생성됩니다" style="font-family:monospace;font-size:13px">
+    </div>
+    <button class="btn bbl btn-full" onclick="saveTokenSetup()">✓ 저장하고 연결</button>
+  `;
+  setTimeout(() => {
+    const el = document.getElementById('token-input');
+    if (el) el.value = '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';
+  }, 100);
+  document.getElementById('ov').classList.add('on');
+}
+
+function saveTokenSetup() {
+  const token = document.getElementById('token-input')?.value?.trim();
+  const gistId = document.getElementById('gist-input')?.value?.trim();
+  if (!token) { tst('토큰을 입력해주세요'); return; }
+  localStorage.setItem('sr-gh-token', token);
+  if (gistId) { 
+    localStorage.setItem('sr-gist-id', gistId);
+    _gistId = gistId;
+  }
+  cmo();
+  tst('✅ 설정 저장됨');
+  setTimeout(jbPull, 300);
+}
 setInterval(jbPull, 5000);
 // 모든 input[type=number,text,date] 클릭 시 전체 선택
 document.addEventListener('click',function(e){
