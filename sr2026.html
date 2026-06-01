@@ -516,7 +516,7 @@ async function jbPull() {
     if (Array.isArray(ri)) { inv = ri; localStorage.setItem('sr-inv', JSON.stringify(inv)); }
     if (Array.isArray(rt)) { txs = rt; localStorage.setItem('sr-tx', JSON.stringify(txs)); }
     if (Array.isArray(ro)) { orders = ro; localStorage.setItem('sr-orders', JSON.stringify(orders)); }
-    const inputTabs = ['io', 'plan', 'barcode', 'loc'];
+    const inputTabs = ['io', 'plan', 'barcode', 'loc', 'order', 'addprod', 'set', 'alert'];
     if (!inputTabs.includes(tab)) { render(); dots(); }
     else { dots(); }
     jbStat('✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 동기화', '#0d9e72');
