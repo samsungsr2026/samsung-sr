@@ -201,6 +201,77 @@ select.fi option{background:#fff;color:#111}
 .loc-edit-input:focus{border-color:var(--blue)}
 .loc-producer-chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;margin:3px;transition:all .15s}
 .loc-producer-chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* ── 모바일/태블릿 반응형 ────────────────────────────── */
+@media (max-width: 768px) {
+  /* 사이드바 숨김 */
+  .sidebar { display: none !important; }
+  
+  /* 메인 영역 전체 너비 */
+  .main { margin-left: 0 !important; padding: 12px 12px 80px !important; }
+  
+  /* 상단바 조정 */
+  .topbar { padding: 0 12px; height: 52px; }
+  .topbar > div[style*="position:absolute"] { width: 120px !important; }
+  .topbar > div[style*="position:absolute"] button { font-size: 12px !important; height: 38px !important; }
+  .brand-text { font-size: 15px !important; }
+  
+  /* 글씨 크기 크게 */
+  body { font-size: 15px !important; }
+  .tbl td { font-size: 14px !important; padding: 12px 10px !important; }
+  .tbl th { font-size: 13px !important; }
+  .stat-val { font-size: 24px !important; }
+  .btn { font-size: 15px !important; padding: 12px 18px !important; }
+  .fi { font-size: 15px !important; padding: 12px 13px !important; }
+  .page-title { font-size: 20px !important; }
+  .card { padding: 14px !important; }
+  
+  /* 그리드 1열로 변경 */
+  .grid2 { grid-template-columns: 1fr !important; }
+  .grid3 { grid-template-columns: 1fr !important; }
+  .stat-row { grid-template-columns: 1fr 1fr !important; }
+  
+  /* 하단 탭바 */
+  .mobile-tabbar {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-tabbar { display: none !important; }
+}
+
+/* 하단 탭바 스타일 */
+.mobile-tabbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  z-index: 150;
+  align-items: stretch;
+}
+.mobile-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 6px 2px;
+  border: none;
+  background: none;
+  transition: all .15s;
+}
+.mobile-tab.on { color: var(--blue); }
+.mobile-tab svg { width: 22px; height: 22px; }
 </style>
 <!-- SheetJS: xlsx/xls 파일 읽기용 -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -692,8 +763,8 @@ function dots(){
   document.getElementById('pldot').style.display=hl?'flex':'none';
   document.getElementById('inv-count').textContent='총 '+inv.length+'종 · 부족 '+inv.filter(i=>st(i)==='low').length+'건';
   const ts=document.getElementById('top-status');
-  const low=inv.filter(i=>st(i)==='low').length;
-  ts.innerHTML=low>0?`<span style="background:var(--red-bg);color:var(--red);padding:5px 14px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--red)" onclick="go('plan')">⚠️ 재고부족 ${low}건 — 발주하기 →</span>`:`<span style="background:var(--green-bg);color:var(--green);padding:5px 14px;border-radius:6px;font-size:13px;font-weight:700;border:1px solid var(--green)">✓ 재고 정상</span>`;
+  // 상단 재고부족 메시지 제거
+  ts.innerHTML='';
   // 로그인 상태 표시
   const auth=document.getElementById('top-auth');
   if(auth){
@@ -717,7 +788,12 @@ function go(t){
   tab=t;
   if(t!=='plan') planSel={};  // 생산계획서 탭 벗어나면 체크 초기화
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));
-  document.getElementById('nb-'+t).classList.add('on');
+  const nb=document.getElementById('nb-'+t);
+  if(nb)nb.classList.add('on');
+  // 모바일 하단 탭바 활성화
+  document.querySelectorAll('.mobile-tab').forEach(b=>b.classList.remove('on'));
+  const mb=document.getElementById('mb-'+t);
+  if(mb)mb.classList.add('on');
   render();
 }
 function goIO(type){
