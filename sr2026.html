@@ -516,7 +516,7 @@ async function jbPull() {
     if (Array.isArray(ri)) { inv = ri; localStorage.setItem('sr-inv', JSON.stringify(inv)); }
     if (Array.isArray(rt)) { txs = rt; localStorage.setItem('sr-tx', JSON.stringify(txs)); }
     if (Array.isArray(ro)) { orders = ro; localStorage.setItem('sr-orders', JSON.stringify(orders)); }
-    const inputTabs = ['io', 'plan', 'barcode'];
+    const inputTabs = ['io', 'plan', 'barcode', 'loc'];
     if (!inputTabs.includes(tab)) { render(); dots(); }
     else { dots(); }
     jbStat('✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 동기화', '#0d9e72');
@@ -4016,7 +4016,7 @@ function rLoc() {
     + '<div style="display:flex;gap:10px;margin-bottom:14px;align-items:center">'
     + '<div class="loc-search-wrap" style="flex:1;margin-bottom:0">'
     + '<svg style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>'
-    + '<input type="text" inputmode="numeric" class="loc-search-input" id="loc-search" placeholder="금형번호 또는 부품번호 입력..." oninput="locSearch(this.value)" autocomplete="off" style="padding-left:44px">'
+    + '<input type="text" inputmode="numeric" class="loc-search-input" id="loc-search" placeholder="금형번호 또는 부품번호 입력..." oninput="locSearch(this.value)" autocomplete="off" onfocus="this.select()" style="padding-left:44px">'
     + '</div>'
     + editBtnHtml
     + '</div>'
