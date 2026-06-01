@@ -235,6 +235,8 @@ select.fi option{background:#fff;color:#111}
   <div class="topbar-right">
     <div class="topbar-right-row">
       <div id="top-status" style="display:flex;gap:8px"></div>
+      <span id="jb-sync" style="font-size:11px;color:#888;white-space:nowrap">🔄 연결 중...</span>
+      <button onclick="jbPull()" style="background:rgba(26,107,255,.1);border:1px solid rgba(26,107,255,.3);color:#1a6bff;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap">🔄 새로고침</button>
       <div id="top-auth" style="display:flex;align-items:center;gap:8px"></div>
     </div>
     <div class="topbar-time" id="tt"></div>
@@ -454,7 +456,70 @@ function requireEdit(){
   return false;
 }
 
-function sv(){localStorage.setItem('sr-inv',JSON.stringify(inv));localStorage.setItem('sr-tx',JSON.stringify(txs));localStorage.setItem('sr-orders',JSON.stringify(orders));}
+// ── Cloudflare Worker 실시간 공유 DB ──────────────────────────
+const CF_URL = 'https://samsung-sr-sync.chshik.workers.dev';
+let _saving = false;
+
+function jbStat(msg, color) {
+  const el = document.getElementById('jb-sync');
+  if (el) { el.textContent = msg; el.style.color = color || '#888'; }
+}
+
+async function cfGet(key) {
+  try {
+    const r = await fetch(CF_URL + '/' + key);
+    if (!r.ok) return null;
+    return await r.json();
+  } catch(e) { return null; }
+}
+
+async function cfSet(key, data) {
+  try {
+    const r = await fetch(CF_URL + '/' + key, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    return r.ok;
+  } catch(e) { return false; }
+}
+
+async function sv() {
+  localStorage.setItem('sr-inv', JSON.stringify(inv));
+  localStorage.setItem('sr-tx', JSON.stringify(txs));
+  localStorage.setItem('sr-orders', JSON.stringify(orders));
+  if (_saving) return;
+  _saving = true;
+  jbStat('💾 저장 중...');
+  try {
+    await Promise.all([
+      cfSet('inv', inv),
+      cfSet('tx', txs),
+      cfSet('orders', orders)
+    ]);
+    jbStat('✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 저장됨', '#0d9e72');
+  } catch(e) {
+    jbStat('⚠️ 저장오류', '#c07800');
+  }
+  _saving = false;
+}
+
+async function jbPull() {
+  if (_saving) return;
+  jbStat('🔄 동기화 중...');
+  try {
+    const [ri, rt, ro] = await Promise.all([cfGet('inv'), cfGet('tx'), cfGet('orders')]);
+    if (Array.isArray(ri)) { inv = ri; localStorage.setItem('sr-inv', JSON.stringify(inv)); }
+    if (Array.isArray(rt)) { txs = rt; localStorage.setItem('sr-tx', JSON.stringify(txs)); }
+    if (Array.isArray(ro)) { orders = ro; localStorage.setItem('sr-orders', JSON.stringify(orders)); }
+    const inputTabs = ['io', 'plan', 'barcode'];
+    if (!inputTabs.includes(tab)) { render(); dots(); }
+    else { dots(); }
+    jbStat('✅ ' + new Date().toLocaleTimeString('ko', {hour:'2-digit', minute:'2-digit'}) + ' 동기화', '#0d9e72');
+  } catch(e) {
+    jbStat('⚠️ 연결오류', '#c07800');
+  }
+}
 
 // 파일 업로드 처리 - 사진은 이미지만, 도면은 모든 파일 허용
 function handleImgUpload(itemId,kind,inputEl){
@@ -4080,7 +4145,9 @@ function locSaveProducer(id) {
   if (q && q.value) locRenderResults(q.value.trim());
 }
 
-tick();setInterval(tick,30000);render();
+tick();setInterval(tick,30000);
+window.addEventListener('load', () => setTimeout(jbPull, 800));
+setInterval(jbPull, 5000);
 // 모든 input[type=number,text,date] 클릭 시 전체 선택
 document.addEventListener('click',function(e){
   if(e.target&&(e.target.tagName==='INPUT')&&
